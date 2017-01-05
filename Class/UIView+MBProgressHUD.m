@@ -36,16 +36,16 @@
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
     hud.mode = mode;
-    hud.color = [UIColor colorWithWhite:0 alpha:0.8];
+    hud.bezelView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
     if (afterDealy > 0) {
-        hud.detailsLabelText = text;
+        hud.detailsLabel.text = text;
     } else {
-        hud.labelText = text;
+        hud.label.text = text;
     }
     
     objc_setAssociatedObject(self, "MBProgressHUD", hud, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (afterDealy > 0 && mode == MBProgressHUDModeText) {
-        [hud hide:YES afterDelay:afterDealy];
+        [hud hideAnimated:YES afterDelay:afterDealy];
     }
 }
 
@@ -63,13 +63,13 @@
     }
     MBProgressHUD *hud = objc_getAssociatedObject(self, "MBProgressHUD");
     if (!text) {
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }else {
-        hud.labelText = nil;
+        hud.label.text = nil;
         hud.mode = MBProgressHUDModeText;
-        hud.detailsLabelText = text;
-        hud.labelFont = [UIFont systemFontOfSize:13];
-        [hud hide:YES afterDelay:afterDealy];
+        hud.detailsLabel.text = text;
+        hud.label.font = [UIFont systemFontOfSize:13];
+        [hud hideAnimated:YES afterDelay:afterDealy];
     }
 }
 
